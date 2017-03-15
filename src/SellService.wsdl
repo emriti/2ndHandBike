@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://www.example.org/2ndHandBike/SellService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:sb="http://www.example.org/2ndHandBike"
+	name="SellService" targetNamespace="http://www.example.org/2ndHandBike/SellService/">
+	<wsdl:types>
+		<xsd:schema>
+			<xsd:import namespace="http://www.example.org/2ndHandBike"
+				schemaLocation="2ndHandBike.xsd">
+			</xsd:import>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="addCartRequest">
+		<wsdl:part name="IPAddress" type="xsd:string" />
+		<wsdl:part name="products" type="sb:Product"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="addCartResponse">
+	</wsdl:message>
+	<wsdl:message name="checkOutRequest">
+		<wsdl:part name="order" type="sb:Order"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="checkOutResponse">
+		<wsdl:part name="result" type="xsd:boolean"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="orderCompletionRequest">
+        <wsdl:part name="orderId" type="xsd:int"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="orderCompletionResponse">
+	</wsdl:message>
+	<wsdl:portType name="SellService">
+		<wsdl:operation name="addCart">
+			<wsdl:input message="tns:addCartRequest" />
+			<wsdl:output message="tns:addCartResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="checkOut">
+			<wsdl:input message="tns:checkOutRequest"></wsdl:input>
+			<wsdl:output message="tns:checkOutResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="orderCompletion">
+			<wsdl:input message="tns:orderCompletionRequest"></wsdl:input>
+			<wsdl:output message="tns:orderCompletionResponse"></wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="SellServiceSOAP" type="tns:SellService">
+		<soap:binding style="rpc"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="addCart">
+			<soap:operation soapAction="http://www.example.org/2ndHandBike/SellService/addCart" />
+			<wsdl:input>
+				<soap:body namespace="http://www.example.org/2ndHandBike/SellService/"
+					use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body namespace="http://www.example.org/2ndHandBike/SellService/"
+					use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="checkOut">
+			<soap:operation soapAction="http://www.example.org/2ndHandBike/SellService/checkOut" />
+			<wsdl:input>
+				<soap:body namespace="http://www.example.org/2ndHandBike/SellService/"
+					use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body namespace="http://www.example.org/2ndHandBike/SellService/"
+					use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="orderCompletion">
+			<soap:operation soapAction="http://www.example.org/2ndHandBike/SellService/orderCompletion" />
+			<wsdl:input>
+				<soap:body namespace="http://www.example.org/2ndHandBike/SellService/"
+					use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body namespace="http://www.example.org/2ndHandBike/SellService/"
+					use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="SellService">
+		<wsdl:port binding="tns:SellServiceSOAP" name="SellServiceSOAP">
+			<soap:address location="http://localhost:8080/Milestone2/services/SellService" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
