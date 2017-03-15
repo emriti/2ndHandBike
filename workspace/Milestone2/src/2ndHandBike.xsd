@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:sb="http://www.example.org/2ndHandBike"
+	targetNamespace="http://www.example.org/2ndHandBike"
+	elementFormDefault="qualified">
+
+	<complexType name="Customer">
+		<sequence>
+			<element name="id" type="long"/>
+			<element name="name" type="string"/>
+			<element name="contactDetail" type="sb:ContactDetail"/>
+		</sequence>
+	</complexType>
+
+	<complexType name="Orders">
+		<sequence>
+			<element minOccurs="0" maxOccurs="unbounded" name="order"
+				type="sb:Order"/>
+		</sequence>
+	</complexType>
+
+	<complexType name="Order">
+		<sequence>
+			<element name="id" type="long"/>
+			<element name="products" type="sb:Products"/>
+			<element name="total" type="double"/>
+			<element name="orderDate" type="date"/>
+			<element name="isPaymentMade" type="boolean"/>
+			<element name="customerId" type="string"/>
+			<element name="completed" type="boolean"/>
+		</sequence>
+	</complexType>
+
+	<complexType name="Finance">
+		<sequence>
+			<element name="Finance" type="string"/>
+			<element name="recentTransaction" type="sb:Orders"/>
+		</sequence>
+	</complexType>
+
+	<complexType name="Product">
+		<sequence>
+			<element name="id" type="string"/>
+			<element name="name" type="string"/>
+			<element name="date" type="date"/>
+			<element name="price" type="double"/>
+			<element name="quantity" type="int"/>
+		</sequence>
+	</complexType>
+
+	<complexType name="Products">
+		<sequence>
+			<element minOccurs="0" maxOccurs="unbounded" name="product"
+				type="sb:Product"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="ContactDetail">
+		<sequence>
+			<element name="name" type="string"/>
+			<element name="value" type="string"/>
+		</sequence>
+	</complexType>
+
+	<complexType name="ContactDetails">
+		<sequence>
+			<element minOccurs="0" maxOccurs="unbounded" name="detail"
+				type="sb:ContactDetail"/>
+		</sequence>
+	</complexType>
+
+</schema>
